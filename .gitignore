@@ -1,0 +1,27 @@
+# Ignore all model weights
+**/models/*.pt
+**/models/*.pth
+
+# Ignore raw image dataset but keep empty folder
+data/raw/fashion-product-images-dataset/images/*
+!data/raw/fashion-product-images-dataset/images/.gitkeep
+
+# VSCode, system, Python junk
+.vscode/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Environment files
+.env
+*.env
+
+# Cache files
+*.cache
+*.log
+*.bak
+
+
