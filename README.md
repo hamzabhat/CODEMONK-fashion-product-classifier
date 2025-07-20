@@ -36,11 +36,12 @@ While the core pipeline is complete—from preprocessing to prediction and visua
 
 - [Project Overview](#project-overview)
 - [Project Structure](#project-structure)
-- [How to Run This Project](#️how-to-run-this-project)
-- [Example Output](#example-output)
-- [Pending Improvements](#pending-improvements)
-- [Model Checkpoints](#model-checkpoints)
-- [Author](#author)
+- [How to Run This Project](#how-to-run-this-project)
+- [🎥 Demo](#-demo)
+- [🧪 Pending Improvements](#-pending-improvements)
+- [🧠 Model Checkpoints](#-model-checkpoints)
+- [👤 Author](#-author)
+
 
 
 ## 🧱 Project Architecture
@@ -190,9 +191,10 @@ streamlit run frontend/app.py
 
 > The UI will open in your browser → Upload an image → Get predictions + visual heatmap.
 
-## Demo
+## 🎥 Demo
 
-[Demo](assets/demo.gif)
+![Demo](assets/demo.gif)
+
 
 > Predictions are returned with corresponding Grad-CAM heatmap.
 ---
