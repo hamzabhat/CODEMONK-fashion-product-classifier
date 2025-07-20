@@ -199,13 +199,16 @@ While the core pipeline is complete—from preprocessing to prediction and visua
 
 ## 📚 Table of Contents
 
+## 📚 Table of Contents
+
 - [Project Overview](#project-overview)
 - [Project Structure](#project-structure)
-- [How to Run This Project](#️how-to-run-this-project)
-- [Example Output](#example-output)
-- [Pending Improvements](#pending-improvements)
-- [Model Checkpoints](#model-checkpoints)
-- [Author](#author)
+- [How to Run This Project](#how-to-run-this-project)
+- [🎥 Demo](#-demo)
+- [🧪 Pending Improvements](#-pending-improvements)
+- [🧠 Model Checkpoints](#-model-checkpoints)
+- [👤 Author](#-author)
+
 
 
 ## 🧱 Project Architecture
@@ -342,28 +345,24 @@ backend/models/
 ###  Step 4: Run Backend API (FastAPI)
 
 ```bash
-cd backend
-uvicorn main:app --reload
+uvicorn backend.main:app --host 0.0.0.0 --port 8080 --reload
 ```
 
-> The API will be live at: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+> The API will be live at: [http://127.0.0.1:8080](http://127.0.0.1:8080)
 
 ---
 
 ###  Step 5: Run Frontend (Streamlit)
 
 ```bash
-cd frontend
-streamlit run app.py
+streamlit run frontend/app.py
 ```
 
 > The UI will open in your browser → Upload an image → Get predictions + visual heatmap.
 
-## Example Output
+## Demo
 
-|  Input Image |  Predictions |  Heatmap |
-|----------------|----------------|------------|
-| ![product](https://via.placeholder.com/150x150?text=Image) |  **Color**: Blue<br> **Type**: T-shirts<br> **Season**: Summer<br> **Gender**: Unisex | ![heatmap](https://via.placeholder.com/150x150?text=GradCAM) |
+[Demo](assets/demo.gif)
 
 > Predictions are returned with corresponding Grad-CAM heatmap.
 ---
