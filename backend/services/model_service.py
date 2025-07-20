@@ -1,32 +1,49 @@
+import torch
+import json
+from PIL import Image
 from backend.utils.preprocessing import preprocess_image
 from backend.utils.explainability import generate_heatmap
-import torch
-from PIL import Image
-import numpy as np
-# ⬇️ Define your class names
-COLOR_CLASSES = ['Black', 'White', 'Blue', 'Red']
-TYPE_CLASSES = ['Shoes', 'T-shirt', 'Shirt', 'Jeans']
-SEASON_CLASSES = ['Summer', 'Winter', 'All']
-GENDER_CLASSES = ['Men', 'Women', 'Unisex']
+from backend.models.effi_net_backbone.effi_net_architecture import MultiTaskEfficientNet
 
-# ⬇️ Load trained model once
-model = torch.load("backend/models/model.pth", map_location=torch.device("cpu"))
+# ⬇️ Load label encoders
+with open("backend/models/encodings/label_encoders.json", "r") as f:
+    label_encoders = json.load(f)
+
+# ⬇️ Get number of classes from encoders
+num_colors = len(label_encoders['baseColour'])
+num_types = len(label_encoders['articleType'])
+num_seasons = len(label_encoders['season'])
+num_genders = len(label_encoders['gender'])
+
+# ⬇️ Load trained model
+model = MultiTaskEfficientNet(
+    num_colors=num_colors,
+    num_types=num_types,
+    num_seasons=num_seasons,
+    num_genders=num_genders
+)
+model.load_state_dict(torch.load("backend/models/checkpoints/model_efficientnet.pth", map_location="cpu"))
 model.eval()
 
+# ⬇️ Prediction + heatmap generation
 def get_predictions_and_heatmap(image_path):
-
     img_tensor, pil_image = preprocess_image(image_path)
 
     with torch.no_grad():
         outputs = model(img_tensor.unsqueeze(0))
 
-    # Extract predictions from model output dict
-    color_pred = COLOR_CLASSES[outputs['color'].argmax()]
-    type_pred = TYPE_CLASSES[outputs['type'].argmax()]
-    season_pred = SEASON_CLASSES[outputs['season'].argmax()]
-    gender_pred = GENDER_CLASSES[outputs['gender'].argmax()]
+    # Convert numeric predictions to class labels using encoders
+    color_idx = outputs['color'].argmax(dim=1).item()
+    type_idx = outputs['type'].argmax(dim=1).item()
+    season_idx = outputs['season'].argmax(dim=1).item()
+    gender_idx = outputs['gender'].argmax(dim=1).item()
 
-    # Generate Grad-CAM heatmap
+    color_pred = label_encoders['baseColour'][str(color_idx)]
+    type_pred = label_encoders['articleType'][str(type_idx)]
+    season_pred = label_encoders['season'][str(season_idx)]
+    gender_pred = label_encoders['gender'][str(gender_idx)]
+
+    # 🔥 Generate heatmap for visualization
     heatmap_filename = generate_heatmap(model, img_tensor, pil_image)
 
     return {
