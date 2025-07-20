@@ -207,8 +207,8 @@ You can download the pre-trained model and label encoders here:
 > Place the downloaded files in:
 > ```
 > backend/models/
-> ├── effi_net_backbone/model_efficientnet.pth
-> └── encodings/label_encoders.json
+├── checkpoints/model_efficientnet.pth
+└── encodings/label_encoders.json
 > ```
 
 ---
