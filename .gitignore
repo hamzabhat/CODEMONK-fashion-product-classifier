@@ -1,6 +1,6 @@
 # Ignore all model weights
-**/models/*.pt
-**/models/*.pth
+*.pt
+*.pth
 
 # Ignore raw image dataset but keep empty folder
 data/raw/fashion-product-images-dataset/images/*
