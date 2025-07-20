@@ -205,11 +205,11 @@ You can download the pre-trained model and label encoders here:
 👉 [EfficientNetV2 Backbone Checkpoint (.pth) + Label Encoders](https://drive.google.com/drive/folders/1xQVRHiBioyCYDghrJk-5HKf7c6vZt_Z9?usp=drive_link)
 
 > Place the downloaded files in:
-> ```
-> backend/models/
+```
+ backend/models/
 ├── checkpoints/model_efficientnet.pth
 └── encodings/label_encoders.json
-> ```
+ ```
 
 ---
 ## 👨‍💻 Author
